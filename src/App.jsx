@@ -1,34 +1,31 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useEffect, useState } from 'react';
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
 
+
+  const [count, SetCount] = useState(0);
+
+
+  useEffect(() => {
+    document.title = `U clicked ${count} times`;
+  }, [count]);
+
+  const addingHandler = () => {
+    SetCount(count + 1);
+  }
+
+  const removingHandler = () => {
+    SetCount(count - 1);
+  }
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className='container'>
+      <p>Count: {count}</p>
+      <div className='buttons'>
+        <button onClick={addingHandler} style={{ margin: "0 0.5rem" }}>Add +</button>
+        <button onClick={removingHandler} style={{ margin: "0 0.5rem" }}>Minus -</button>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more!!!!!!!!!!!!
-      </p>
-    </>
+    </div>
   )
 }
 
