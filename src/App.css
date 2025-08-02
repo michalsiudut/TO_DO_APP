@@ -1,11 +1,22 @@
+html,
 body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
-.container {
-    text-align: center;
+body {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.header {
+    font-size: 2rem;
+}
+
+.minus {
+
+    margin-left: 20px;
+    margin-right: 20px;
 }

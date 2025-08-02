@@ -1,32 +1,58 @@
 import { useEffect, useState } from 'react';
-import './App.css'
+import './App.css';
 
-function App() {
+const App = () => {
 
+  const getActiveTasks = () => {
+    const savedTasks = localStorage.getItem('tasks');
+    return savedTasks ? JSON.parse(savedTasks) : [];
+  }
 
-  const [count, SetCount] = useState(0);
-
+  const [task, setTask] = useState('');
+  const [tasks, setTasks] = useState(getActiveTasks);
 
   useEffect(() => {
-    document.title = `U clicked ${count} times`;
-  }, [count]);
+    localStorage.setItem('tasks', JSON.stringify(tasks))
+  }, [tasks]);
 
-  const addingHandler = () => {
-    SetCount(count + 1);
+  const setTaskHandler = (event) => {
+    setTask(event.target.value);
   }
 
-  const removingHandler = () => {
-    SetCount(count - 1);
+  const addTaskHandler = () => {
+    if (task.trim() != '') {
+      setTasks(prevTasks => [...prevTasks, task]);
+      setTask('');
+    }
   }
+
+  const removeTaskHandler = (props) => {
+    const updatedTasks = tasks.filter((_, index) => index != props);
+    setTasks(updatedTasks);
+  }
+
   return (
-    <div className='container'>
-      <p>Count: {count}</p>
-      <div className='buttons'>
-        <button onClick={addingHandler} style={{ margin: "0 0.5rem" }}>Add +</button>
-        <button onClick={removingHandler} style={{ margin: "0 0.5rem" }}>Minus -</button>
+    <>
+      <div className='header'>
+        Welcome to my to do app!
       </div>
-    </div>
-  )
-}
+      <input type='text'
+        placeholder='Add task here'
+        value={task}
+        onChange={setTaskHandler}>
+      </input>
+      <button onClick={addTaskHandler}>
+        +
+      </button>
+      <ul>
+        {tasks.map((t, index) => (
+          <li key={index}>
+            {t}  <button className='minus' onClick={() => removeTaskHandler(index)}>-</button>
+          </li>
+        ))}
+      </ul>
+    </>
+  );
+};
 
-export default App
+export default App;
