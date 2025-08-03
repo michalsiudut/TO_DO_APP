@@ -1,35 +1,12 @@
 import { useEffect, useState } from 'react';
 import './App.css';
+import { CustomAddingbutton, CustomRemovingbutton } from './components/Buttons';
+import { useTasks } from './hooks/useTasks';
 
 const App = () => {
 
-  const getActiveTasks = () => {
-    const savedTasks = localStorage.getItem('tasks');
-    return savedTasks ? JSON.parse(savedTasks) : [];
-  }
 
-  const [task, setTask] = useState('');
-  const [tasks, setTasks] = useState(getActiveTasks);
-
-  useEffect(() => {
-    localStorage.setItem('tasks', JSON.stringify(tasks))
-  }, [tasks]);
-
-  const setTaskHandler = (event) => {
-    setTask(event.target.value);
-  }
-
-  const addTaskHandler = () => {
-    if (task.trim() != '') {
-      setTasks(prevTasks => [...prevTasks, task]);
-      setTask('');
-    }
-  }
-
-  const removeTaskHandler = (props) => {
-    const updatedTasks = tasks.filter((_, index) => index != props);
-    setTasks(updatedTasks);
-  }
+  const { task, tasks, addTask, removeTask, setTaskHandler } = useTasks();
 
   return (
     <>
@@ -41,13 +18,11 @@ const App = () => {
         value={task}
         onChange={setTaskHandler}>
       </input>
-      <button onClick={addTaskHandler}>
-        +
-      </button>
+      <CustomAddingbutton onClick={addTask}></CustomAddingbutton>
       <ul>
         {tasks.map((t, index) => (
           <li key={index}>
-            {t}  <button className='minus' onClick={() => removeTaskHandler(index)}>-</button>
+            {t}  <CustomRemovingbutton onClick={() => removeTask(index)}></CustomRemovingbutton>
           </li>
         ))}
       </ul>
