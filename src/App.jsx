@@ -1,12 +1,11 @@
-import { useEffect, useState } from 'react';
 import './App.css';
-import { CustomAddingbutton, CustomRemovingbutton } from './components/Buttons';
+import { CustomAddingbutton, CustomRemovingbutton, CustomEditbutton } from './components/Buttons';
 import { useTasks } from './hooks/useTasks';
 
 const App = () => {
 
 
-  const { task, tasks, addTask, removeTask, setTaskHandler } = useTasks();
+  const { task, tasks, addTask, removeTask, setTaskHandler, isEdited, editTask } = useTasks();
 
   return (
     <>
@@ -19,13 +18,14 @@ const App = () => {
         onChange={setTaskHandler}>
       </input>
       <CustomAddingbutton onClick={addTask}></CustomAddingbutton>
-      <ul>
+      <li>
         {tasks.map((t, index) => (
-          <li key={index}>
-            {t}  <CustomRemovingbutton onClick={() => removeTask(index)}></CustomRemovingbutton>
+          <li key={index} className='container'>
+            Task {index}.
+            {isEdited ? <div>elo</div> : <div>elo2</div>}{t}  <CustomRemovingbutton onClick={() => removeTask(index)}></CustomRemovingbutton>  <CustomEditbutton onClick={() => editTask(t, index)}></CustomEditbutton>
           </li>
         ))}
-      </ul>
+      </li>
     </>
   );
 };

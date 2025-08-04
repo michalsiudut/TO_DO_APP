@@ -9,7 +9,18 @@ body {
 }
 
 .minus {
-
+    margin-top: 10px;
     margin-left: 20px;
     margin-right: 20px;
+}
+
+.plus {
+    margin-left: 20px;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
 }
