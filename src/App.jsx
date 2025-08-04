@@ -5,7 +5,7 @@ import { useTasks } from './hooks/useTasks';
 const App = () => {
 
 
-  const { task, tasks, addTask, removeTask, setTaskHandler, isEdited, editTask } = useTasks();
+  const { task, tasks, addTask, removeTask, setTaskHandler, editedIndex, editTask, changeStateTask, setEditedTextHandler, saveTask, editedText } = useTasks();
 
   return (
     <>
@@ -21,8 +21,11 @@ const App = () => {
       <li>
         {tasks.map((t, index) => (
           <li key={index} className='container'>
-            Task {index}.
-            {isEdited ? <div>elo</div> : <div>elo2</div>}{t}  <CustomRemovingbutton onClick={() => removeTask(index)}></CustomRemovingbutton>  <CustomEditbutton onClick={() => editTask(t, index)}></CustomEditbutton>
+            Task {index + 1}.
+            {(editedIndex == index) ?
+              <><input value={editedText} onChange={setEditedTextHandler}></input> <button onClick={saveTask}>Save</button> <button onClick={changeStateTask}>Cancel</button></>
+              :
+              <>{t}<CustomRemovingbutton onClick={() => removeTask(index)} />  <CustomEditbutton onClick={() => editTask(t, index)} /></>}
           </li>
         ))}
       </li>

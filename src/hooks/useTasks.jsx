@@ -6,12 +6,12 @@ import { useLocalStorageState } from "./useLocalStorageState";
 export function useTasks() {
     const [task, setTask] = useState('');
     const [tasks, setTasks] = useLocalStorageState(task, []);
-    const [isEdited, setEdit] = useState(false);
+    const [editedIndex, setEditedIndex] = useState(null);
+    const [editedText, setEditedText] = useState('');
 
     const setTaskHandler = (event) => {
         setTask(event.target.value);
     }
-
 
     const removeTask = (index) => {
         setTasks(prev => prev.filter((_, i) => i != index));
@@ -23,14 +23,28 @@ export function useTasks() {
         }
     }
 
-    const editTask = (text, index) => {
-        setEdit((prev) => !prev);
-        console.log("elo")
+    const changeStateTask = () => {
+        setEditedIndex(null);
+        setEditedText(null);
     }
 
+    const editTask = (text, index) => {
+        setEditedIndex(index);
+        setEditedText(text);
+    }
+
+    const saveTask = () => {
+        setTasks(prev => prev.map((t, i) => (i === editedIndex ? editedText : t)));
+        setEditedIndex(null);
+        setEditedText('');
+    };
+
+    const setEditedTextHandler = (e) => {
+        setEditedText(e.target.value);
+    };
 
 
-    return { task, tasks, addTask, removeTask, setTaskHandler, isEdited, editTask }
+    return { task, tasks, addTask, removeTask, setTaskHandler, editedIndex, editTask, changeStateTask, setEditedTextHandler, saveTask, editedText }
 
 
 }
