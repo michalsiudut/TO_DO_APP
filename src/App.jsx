@@ -1,35 +1,56 @@
 import './App.css';
-import { CustomAddingbutton, CustomRemovingbutton, CustomEditbutton } from './components/Buttons';
+import { CustomAddingbutton, CustomRemovingbutton, CustomEditbutton, CustomSavebutton, CustomCancelbutton } from './components/Buttons';
 import { useTasks } from './hooks/useTasks';
 
 const App = () => {
-
-
-  const { task, tasks, addTask, removeTask, setTaskHandler, editedIndex, editTask, changeStateTask, setEditedTextHandler, saveTask, editedText, useAnimation, isFull } = useTasks();
+  const {
+    task, tasks, addTask, removeTask, setTaskHandler,
+    editedIndex, editTask, changeStateTask, setEditedTextHandler,
+    saveTask, editedText, useAnimation, isFull
+  } = useTasks();
 
   return (
-    <>
-      <div className='header'>
-        Welcome to yours TO DO
-      </div>
-      <input type='text'
-        placeholder='Add task here'
-        value={task}
-        onChange={setTaskHandler}>
-      </input>
-      <CustomAddingbutton onClick={addTask} useAnimation={useAnimation} isFull={isFull}></CustomAddingbutton>
-      <li>
+    <div className="app">
+      <header className='header'>
+        Welcome to my TO DO
+      </header>
+
+      <section className='inputSection'>
+        <input
+          type='text'
+          placeholder='Add task here'
+          value={task}
+          onChange={setTaskHandler}
+          className="inputTask"
+        />
+        <CustomAddingbutton onClick={addTask} useAnimation={useAnimation} isFull={isFull} />
+      </section>
+
+      <ul className='taskList'>
         {tasks.map((t, index) => (
-          <li key={index} className='container'>
-            Task {index + 1}.
-            {(editedIndex == index) ?
-              <><input className='input1' value={editedText} onChange={setEditedTextHandler}></input> <button onClick={saveTask}>Save</button> <button onClick={changeStateTask}>Cancel</button></>
-              :
-              <>{t}<CustomRemovingbutton onClick={() => removeTask(index)} />  <CustomEditbutton onClick={() => editTask(t, index)} /></>}
+          <li key={index} className='taskItem'>
+            <span className='taskLabel'>Task {index + 1}.</span>
+            {editedIndex === index ? (
+              <>
+                <input
+                  className='inputEdit'
+                  value={editedText}
+                  onChange={setEditedTextHandler}
+                />
+                <CustomSavebutton onClick={saveTask} />
+                <CustomCancelbutton onClick={changeStateTask} />
+              </>
+            ) : (
+              <>
+                <span>{t}</span>
+                <CustomRemovingbutton onClick={() => removeTask(index)} />
+                <CustomEditbutton onClick={() => editTask(t, index)} />
+              </>
+            )}
           </li>
         ))}
-      </li>
-    </>
+      </ul>
+    </div>
   );
 };
 

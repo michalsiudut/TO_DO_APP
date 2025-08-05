@@ -10,6 +10,23 @@
     border-radius: 10px;
 }
 
+.minus:hover {
+    background-color: red;
+}
+
+.editButton:hover {
+    background-color: blue;
+}
+
+.saveButton:hover {
+    background-color: green;
+}
+
+.cancelButton:hover {
+    background-color: red;
+}
+
+
 @keyframes animationOfAdding {
 
 
