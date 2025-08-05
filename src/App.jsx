@@ -5,19 +5,19 @@ import { useTasks } from './hooks/useTasks';
 const App = () => {
 
 
-  const { task, tasks, addTask, removeTask, setTaskHandler, editedIndex, editTask, changeStateTask, setEditedTextHandler, saveTask, editedText, useAnimation } = useTasks();
+  const { task, tasks, addTask, removeTask, setTaskHandler, editedIndex, editTask, changeStateTask, setEditedTextHandler, saveTask, editedText, useAnimation, isFull } = useTasks();
 
   return (
     <>
       <div className='header'>
-        Welcome to my to do app!
+        Welcome to yours TO DO
       </div>
       <input type='text'
         placeholder='Add task here'
         value={task}
         onChange={setTaskHandler}>
       </input>
-      <CustomAddingbutton onClick={addTask} useAnimation={useAnimation}></CustomAddingbutton>
+      <CustomAddingbutton onClick={addTask} useAnimation={useAnimation} isFull={isFull}></CustomAddingbutton>
       <li>
         {tasks.map((t, index) => (
           <li key={index} className='container'>

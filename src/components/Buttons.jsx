@@ -8,9 +8,9 @@ export const CustomRemovingbutton = ({ onClick }) => {
     </svg></button>;
 }
 
-export const CustomAddingbutton = ({ onClick, useAnimation }) => {
+export const CustomAddingbutton = ({ onClick, useAnimation, isFull }) => {
 
-    return (<button onClick={onClick} className={useAnimation ? 'plusAnimation' : 'plus'}>
+    return (<button onClick={onClick} className={useAnimation ? 'plusAnimation' : 'plus'} id={isFull ? 'plusHover' : 'plus'}>
         <i class="fa-solid fa-plus"></i>
     </button>);
 }

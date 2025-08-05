@@ -9,9 +9,11 @@ export function useTasks() {
     const [editedIndex, setEditedIndex] = useState(null);
     const [editedText, setEditedText] = useState('');
     const [useAnimation, setAnimation] = useState(false);
+    const [isFull, setFull] = useState(false);
 
     const setTaskHandler = (event) => {
         setTask(event.target.value);
+        setFull(event.target.value.trim() != '');
     }
 
     const removeTask = (index) => {
@@ -49,7 +51,7 @@ export function useTasks() {
 
 
 
-    return { task, tasks, addTask, removeTask, setTaskHandler, editedIndex, editTask, changeStateTask, setEditedTextHandler, saveTask, editedText, useAnimation }
+    return { task, tasks, addTask, removeTask, setTaskHandler, editedIndex, editTask, changeStateTask, setEditedTextHandler, saveTask, editedText, useAnimation, isFull }
 
 
 }
