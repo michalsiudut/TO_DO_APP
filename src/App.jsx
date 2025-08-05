@@ -23,7 +23,7 @@ const App = () => {
           <li key={index} className='container'>
             Task {index + 1}.
             {(editedIndex == index) ?
-              <><input value={editedText} onChange={setEditedTextHandler}></input> <button onClick={saveTask}>Save</button> <button onClick={changeStateTask}>Cancel</button></>
+              <><input className='input1' value={editedText} onChange={setEditedTextHandler}></input> <button onClick={saveTask}>Save</button> <button onClick={changeStateTask}>Cancel</button></>
               :
               <>{t}<CustomRemovingbutton onClick={() => removeTask(index)} />  <CustomEditbutton onClick={() => editTask(t, index)} /></>}
           </li>

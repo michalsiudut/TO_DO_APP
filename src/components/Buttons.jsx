@@ -1,4 +1,4 @@
-
+import './Buttons.css';
 
 export const CustomRemovingbutton = ({ onClick }) => {
 
@@ -11,7 +11,7 @@ export const CustomRemovingbutton = ({ onClick }) => {
 export const CustomAddingbutton = ({ onClick }) => {
 
     return (<button onClick={onClick} className="plus">
-        +
+        <i class="fa-solid fa-plus"></i>
     </button>);
 }
 
