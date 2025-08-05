@@ -8,6 +8,7 @@ export function useTasks() {
     const [tasks, setTasks] = useLocalStorageState(task, []);
     const [editedIndex, setEditedIndex] = useState(null);
     const [editedText, setEditedText] = useState('');
+    const [useAnimation, setAnimation] = useState(false);
 
     const setTaskHandler = (event) => {
         setTask(event.target.value);
@@ -20,7 +21,10 @@ export function useTasks() {
         if (task.trim() != '') {
             setTasks(prev => [...prev, task]);
             setTask('');
+            setAnimation(true);
+            setTimeout(() => { setAnimation(false); }, 300);
         }
+
     }
 
     const changeStateTask = () => {
@@ -44,7 +48,8 @@ export function useTasks() {
     };
 
 
-    return { task, tasks, addTask, removeTask, setTaskHandler, editedIndex, editTask, changeStateTask, setEditedTextHandler, saveTask, editedText }
+
+    return { task, tasks, addTask, removeTask, setTaskHandler, editedIndex, editTask, changeStateTask, setEditedTextHandler, saveTask, editedText, useAnimation }
 
 
 }

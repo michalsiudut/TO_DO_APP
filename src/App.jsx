@@ -5,7 +5,7 @@ import { useTasks } from './hooks/useTasks';
 const App = () => {
 
 
-  const { task, tasks, addTask, removeTask, setTaskHandler, editedIndex, editTask, changeStateTask, setEditedTextHandler, saveTask, editedText } = useTasks();
+  const { task, tasks, addTask, removeTask, setTaskHandler, editedIndex, editTask, changeStateTask, setEditedTextHandler, saveTask, editedText, useAnimation } = useTasks();
 
   return (
     <>
@@ -17,7 +17,7 @@ const App = () => {
         value={task}
         onChange={setTaskHandler}>
       </input>
-      <CustomAddingbutton onClick={addTask}></CustomAddingbutton>
+      <CustomAddingbutton onClick={addTask} useAnimation={useAnimation}></CustomAddingbutton>
       <li>
         {tasks.map((t, index) => (
           <li key={index} className='container'>
