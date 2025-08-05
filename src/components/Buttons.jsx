@@ -2,7 +2,7 @@ import './Buttons.css';
 
 export const CustomRemovingbutton = ({ onClick }) => {
 
-    return <button className='minus' onClick={onClick}>Cancel</button>;
+    return <button className='minus' onClick={onClick}>Remove</button>;
 }
 
 export const CustomAddingbutton = ({ onClick, useAnimation, isFull }) => {
