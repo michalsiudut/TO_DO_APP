@@ -12,8 +12,8 @@ export const CustomAddingbutton = ({ onClick, useAnimation, isFull }) => {
     </button>);
 }
 
-export const CustomEditbutton = ({ onClick }) => {
-    return (<button onClick={onClick} className='editButton'>Edit</button >)
+export const CustomEditbutton = ({ onClick, useEditAnimation }) => {
+    return (<button onClick={onClick} className={useEditAnimation ? 'editAnimation' : 'editButton'}>Edit</button >)
 }
 
 export const CustomSavebutton = ({ onClick }) => {

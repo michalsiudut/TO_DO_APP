@@ -6,7 +6,7 @@ const App = () => {
   const {
     task, tasks, addTask, removeTask, setTaskHandler,
     editedIndex, editTask, changeStateTask, setEditedTextHandler,
-    saveTask, editedText, useAnimation, isFull, animatingCancelIndex
+    saveTask, editedText, useAnimation, isFull, animatingCancelIndex, editAnimationIndex
   } = useTasks();
 
   return (
@@ -28,7 +28,7 @@ const App = () => {
 
       <ul className='taskList'>
         {tasks.map((t, index) => (
-          <li key={index} className={`taskItem ${animatingCancelIndex == index ? 'crash' : ''}`}>
+          <li key={index} className={`taskItem ${animatingCancelIndex == index ? 'crash' : ''}  ${editAnimationIndex === index ? 'edit' : ''}`}>
             <span className='taskLabel'>Task {index + 1}.</span>
             {editedIndex === index ? (
               <>

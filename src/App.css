@@ -64,6 +64,11 @@ body {
     animation: crashAnimation 1s ease-in-out 0s 1 normal running;
 }
 
+.edit {
+
+    animation: editRotateAnimation 1s ease 0s 1 normal running;
+}
+
 .inputEdit {
     background-color: #A2D5C6;
     color: #1a1a1a;
@@ -80,4 +85,27 @@ body {
         transform: scale(0);
         opacity: 0;
     }
+}
+
+@keyframes editRotateAnimation {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    25% {
+        transform: rotate(5deg);
+    }
+
+    50% {
+        transform: rotate(-10deg);
+    }
+
+    75% {
+        transform: rotate(5deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+
 }
