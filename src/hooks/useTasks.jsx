@@ -12,6 +12,7 @@ export function useTasks() {
     const [isFull, setFull] = useState(false);
     const [animatingCancelIndex, setAnimatingIndex] = useState(null);
     const [editAnimationIndex, setEditAnimationIndex] = useState(null);
+    const [saveAnimationIndex, setSaveAnimationIndex] = useState(null);
 
     const setTaskHandler = (event) => {
         setTask(event.target.value);
@@ -45,13 +46,15 @@ export function useTasks() {
         setEditAnimationIndex(index);
         setEditedIndex(index);
         setEditedText(text);
-        setTimeout(() => { setEditAnimationIndex(false); }, 1000);
+        setTimeout(() => { setEditAnimationIndex(null); }, 500);
     }
 
-    const saveTask = () => {
+    const saveTask = (index) => {
         setTasks(prev => prev.map((t, i) => (i === editedIndex ? editedText : t)));
+        setSaveAnimationIndex(index);
         setEditedIndex(null);
         setEditedText('');
+        setTimeout(() => { setSaveAnimationIndex(null); }, 1000);
     };
 
     const setEditedTextHandler = (e) => {
@@ -60,7 +63,7 @@ export function useTasks() {
 
 
 
-    return { task, tasks, addTask, removeTask, setTaskHandler, editedIndex, editTask, changeStateTask, setEditedTextHandler, saveTask, editedText, useAnimation, isFull, animatingCancelIndex, editAnimationIndex }
+    return { task, tasks, addTask, removeTask, setTaskHandler, editedIndex, editTask, changeStateTask, setEditedTextHandler, saveTask, editedText, useAnimation, isFull, animatingCancelIndex, editAnimationIndex, saveAnimationIndex }
 
 
 }

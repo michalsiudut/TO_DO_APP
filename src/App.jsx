@@ -6,7 +6,8 @@ const App = () => {
   const {
     task, tasks, addTask, removeTask, setTaskHandler,
     editedIndex, editTask, changeStateTask, setEditedTextHandler,
-    saveTask, editedText, useAnimation, isFull, animatingCancelIndex, editAnimationIndex
+    saveTask, editedText, useAnimation, isFull, animatingCancelIndex, editAnimationIndex,
+    saveAnimationIndex
   } = useTasks();
 
   return (
@@ -28,8 +29,8 @@ const App = () => {
 
       <ul className='taskList'>
         {tasks.map((t, index) => (
-          <li key={index} className={`taskItem ${animatingCancelIndex == index ? 'crash' : ''}  ${editAnimationIndex === index ? 'edit' : ''}`}>
-            <span className='taskLabel'>Task {index + 1}.</span>
+          <li key={index} className={`taskItem ${animatingCancelIndex == index ? 'crash' : ''}  ${editAnimationIndex == index ? 'edit' : ''} ${saveAnimationIndex == index ? 'save' : ''}`}>
+            <span className='taskLabel'>Task {index + 1}</span>
             {editedIndex === index ? (
               <>
                 <input
@@ -37,7 +38,7 @@ const App = () => {
                   value={editedText}
                   onChange={setEditedTextHandler}
                 />
-                <CustomSavebutton onClick={saveTask} />
+                <CustomSavebutton onClick={() => saveTask(index)} />
                 <CustomCancelbutton onClick={changeStateTask} />
               </>
             ) : (
