@@ -7,6 +7,7 @@
     color: white;
     background-color: #242424;
     min-height: 100vh;
+    margin-top: -190px;
 }
 
 
@@ -37,6 +38,11 @@ body {
     border-radius: 10px;
     text-shadow: 3px 3px 5px aqua;
 
+}
+
+.userDiv {
+    margin-left: 20px;
+    margin-bottom: 10px;
 }
 
 .taskList {
@@ -78,6 +84,30 @@ body {
     background-color: #A2D5C6;
     color: #1a1a1a;
     border-radius: 10px;
+}
+
+.ZODlabel {
+    display: flex;
+    width: 300px;
+}
+
+.buttonZOD {
+    height: 40px;
+    text-align: center;
+    margin-top: 13px;
+    margin-left: 5px;
+    justify-content: center;
+}
+
+.inputZOD {
+    display: flex;
+    margin: 20px;
+    background-color: #A2D5C6;
+    box-shadow: 0px 0px 5px aqua;
+    height: 20px;
+    border-color: white;
+    border-radius: 10px;
+    color: #1a1a1a
 }
 
 @keyframes crashAnimation {

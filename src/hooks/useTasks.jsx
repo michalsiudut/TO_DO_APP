@@ -2,10 +2,9 @@ import { useState } from "react";
 import { useLocalStorageState } from "./useLocalStorageState";
 
 
-
 export function useTasks() {
     const [task, setTask] = useState('');
-    const [tasks, setTasks] = useLocalStorageState(task, []);
+    const [tasks, setTasks] = useLocalStorageState("tasks", []);
     const [editedIndex, setEditedIndex] = useState(null);
     const [editedText, setEditedText] = useState('');
     const [useAnimation, setAnimation] = useState(false);
@@ -13,6 +12,29 @@ export function useTasks() {
     const [animatingCancelIndex, setAnimatingIndex] = useState(null);
     const [editAnimationIndex, setEditAnimationIndex] = useState(null);
     const [saveAnimationIndex, setSaveAnimationIndex] = useState(null);
+    const [userNameEdited, setUserNameEdited] = useState("");
+    const [userName, setUserName] = useLocalStorageState("userName", "No data");
+    const [userAgeEdited, setUserAgeEdited] = useState("");
+    const [userAge, setUserAge] = useLocalStorageState("userAge", "No data");
+
+    const setUserAgeEditedHandler = (age) => {
+        setUserAgeEdited(age);
+    }
+
+    const setUserAgeHandler = () => {
+        setUserAge(userAgeEdited);
+        setUserAgeEdited("");
+    }
+
+    const setUserNameHandler = () => {
+
+        setUserName(userNameEdited);
+        setUserNameEdited("");
+    }
+
+    const setEditedUserNameHandler = (text) => {
+        setUserNameEdited(text);
+    }
 
     const setTaskHandler = (event) => {
         setTask(event.target.value);
@@ -63,7 +85,13 @@ export function useTasks() {
 
 
 
-    return { task, tasks, addTask, removeTask, setTaskHandler, editedIndex, editTask, changeStateTask, setEditedTextHandler, saveTask, editedText, useAnimation, isFull, animatingCancelIndex, editAnimationIndex, saveAnimationIndex }
+    return {
+        task, tasks, addTask, removeTask, setTaskHandler,
+        editedIndex, editTask, changeStateTask, setEditedTextHandler,
+        saveTask, editedText, useAnimation, isFull, animatingCancelIndex,
+        editAnimationIndex, saveAnimationIndex, userNameEdited, setEditedUserNameHandler,
+        setUserNameHandler, userName, setUserAgeEditedHandler, setUserAgeHandler, userAge, userAgeEdited
+    }
 
 
 }
