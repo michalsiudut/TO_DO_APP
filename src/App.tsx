@@ -5,6 +5,7 @@ import { useTasks } from './hooks/useTasks';
 import { useUserProperties } from './hooks/useUserProperites';
 import { useForm } from 'react-hook-form'
 import { UserForm, userFormSchema } from './validation/userValidation';
+import { TaskList } from './components/features/TaskList';
 
 const App = () => {
 
@@ -24,10 +25,7 @@ const App = () => {
   };
 
   const {
-    task, tasks, addTask, removeTask, setTaskHandler,
-    editedIndex, editTask, changeStateTask, setEditedTextHandler,
-    saveTask, editedText, useAnimation, isFull, animatingCancelIndex, editAnimationIndex,
-    saveAnimationIndex
+    task, addTask, setTaskHandler, useAnimation, isFull,
   } = useTasks();
 
 
@@ -84,56 +82,8 @@ const App = () => {
             text={<i className="fa-solid fa-plus"></i>}
             clas="plusAnimation" />
         </section>
-
-        <ul className='taskList'>
-          {tasks.map((t: string, index: number) => (
-            <li key={index} className={`taskItem ${animatingCancelIndex == index ? 'crash' : ''}  ${editAnimationIndex == index ? 'edit' : ''} ${saveAnimationIndex == index ? 'save' : ''}`}>
-              <span className='taskLabel'>Task {index + 1}</span>
-              {editedIndex === index ? (
-                <>
-                  <input
-                    className='inputEdit'
-                    value={editedText}
-                    onChange={setEditedTextHandler}
-                  />
-                  <CustomButton
-                    onClick={() => saveTask(index)}
-                    useEditAnimation='true'
-                    useAnimation={useAnimation}
-                    isFull={isFull}
-                    text="Save"
-                    clas="saveButton" />
-                  <CustomButton
-                    onClick={changeStateTask}
-                    useEditAnimation='true'
-                    useAnimation={true}
-                    isFull={false}
-                    text="Cancel"
-                    clas="cancelButton" />
-                </>
-              ) : (
-                <>
-                  <span>{t}</span>
-                  <CustomButton
-                    onClick={() => removeTask(index)}
-                    useEditAnimation='true'
-                    useAnimation={true}
-                    isFull={false}
-                    text="Remove"
-                    clas="minus" />
-                  <CustomButton
-                    onClick={() => editTask(t, index)}
-                    useEditAnimation={undefined}
-                    useAnimation={true}
-                    isFull={false}
-                    text="Edit"
-                    clas="minus" />
-                </>
-              )}
-            </li>
-          ))}
-        </ul>
       </div>
+      <TaskList />
     </>
   );
 };
