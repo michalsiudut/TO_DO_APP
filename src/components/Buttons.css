@@ -3,6 +3,9 @@
     animation: animationOfAdding 0.3s ease-in-out 0s 1 normal running;
 }
 
+.plus {
+    margin-left: 20px;
+}
 
 #plusHover:hover {
     border-style: dashed;
@@ -18,6 +21,9 @@
     background-color: blue;
 }
 
+.saveButton {
+    margin-left: -100px;
+}
 
 .saveButton:hover {
     background-color: green;

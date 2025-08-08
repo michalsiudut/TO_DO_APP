@@ -1,6 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import './App.css';
-import { CustomAddingbutton, CustomRemovingbutton, CustomEditbutton, CustomSavebutton, CustomCancelbutton } from './components/Buttons';
+import { CustomButton } from './components/Buttons';
 import { useTasks } from './hooks/useTasks';
 import { useUserProperties } from './hooks/useUserProperites';
 import { useForm } from 'react-hook-form'
@@ -58,7 +58,6 @@ const App = () => {
           />
           {errors.userAge && <p className='errors'>{errors.userAge.message}</p>}
         </div>
-
         <button className='buttonZOD' type="submit">Apply</button>
         <div className='userDiv'>Your name: {userName}</div>
         <div className='userDiv'>Your age: {userAge}</div>
@@ -77,7 +76,13 @@ const App = () => {
             onChange={setTaskHandler}
             className="inputTask"
           />
-          <CustomAddingbutton onClick={addTask} useAnimation={useAnimation} isFull={isFull} />
+          <CustomButton
+            onClick={addTask}
+            useEditAnimation='true'
+            useAnimation={useAnimation}
+            isFull={isFull}
+            text={<i className="fa-solid fa-plus"></i>}
+            clas="plusAnimation" />
         </section>
 
         <ul className='taskList'>
@@ -91,14 +96,38 @@ const App = () => {
                     value={editedText}
                     onChange={setEditedTextHandler}
                   />
-                  <CustomSavebutton onClick={() => saveTask(index)} />
-                  <CustomCancelbutton onClick={changeStateTask} />
+                  <CustomButton
+                    onClick={() => saveTask(index)}
+                    useEditAnimation='true'
+                    useAnimation={useAnimation}
+                    isFull={isFull}
+                    text="Save"
+                    clas="saveButton" />
+                  <CustomButton
+                    onClick={changeStateTask}
+                    useEditAnimation='true'
+                    useAnimation={true}
+                    isFull={false}
+                    text="Cancel"
+                    clas="cancelButton" />
                 </>
               ) : (
                 <>
                   <span>{t}</span>
-                  <CustomRemovingbutton onClick={() => removeTask(index)} />
-                  <CustomEditbutton onClick={() => editTask(t, index)} useEditAnimation={undefined} />
+                  <CustomButton
+                    onClick={() => removeTask(index)}
+                    useEditAnimation='true'
+                    useAnimation={true}
+                    isFull={false}
+                    text="Remove"
+                    clas="minus" />
+                  <CustomButton
+                    onClick={() => editTask(t, index)}
+                    useEditAnimation={undefined}
+                    useAnimation={true}
+                    isFull={false}
+                    text="Edit"
+                    clas="minus" />
                 </>
               )}
             </li>
