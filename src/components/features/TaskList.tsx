@@ -1,15 +1,27 @@
-import { useTasks } from "@/hooks/useTasks";
 import { CustomButton } from "../Buttons";
 
-export const TaskList = () => {
+type TaskListProps = {
+    tasks: string[];
+    removeTask: (index: number) => void;
+    editedIndex: number | null;
+    editTask: (task: string, index: number) => void;
+    changeStateTask: () => void;
+    setEditedTextHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    saveTask: (index: number) => void;
+    editedText: string;
+    useAnimation: boolean;
+    isFull: boolean;
+    animatingCancelIndex: number | null;
+    editAnimationIndex: number | null;
+    saveAnimationIndex: number | null;
+};
 
-    const {
-        task, tasks, removeTask,
-        editedIndex, editTask, changeStateTask, setEditedTextHandler,
-        saveTask, editedText, useAnimation, isFull, animatingCancelIndex, editAnimationIndex,
-        saveAnimationIndex
-    } = useTasks();
-
+export const TaskList = ({
+    tasks, removeTask, editedIndex, editTask,
+    changeStateTask, setEditedTextHandler, saveTask,
+    editedText, useAnimation, isFull,
+    animatingCancelIndex, editAnimationIndex, saveAnimationIndex
+}: TaskListProps) => {
 
     return (<>
         <ul className='taskList'>
