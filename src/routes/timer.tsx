@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { timerSchemaVal, timerSchema } from '../validation/timerValidation';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useEffect } from 'react';
+import { InputTimer } from '@/components/InputTimer';
 
 export const Route = createFileRoute('/timer')({
     component: RouteComponent,
@@ -62,24 +63,24 @@ function RouteComponent() {
             <div className="bg-[#242424] text-white flex justify-center text-2xl">Set your time:</div>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className='flex justify-center bg-[#242424] text-white'>
-                    <div>
-                        Hours:
-                        <input className="bg-[#242424] text-white border rounded m-3" {...register('hours', { valueAsNumber: true })}>
-                        </input>
-                        {errors.hours && <p className="text-red-500">{errors.hours.message}</p>}
-                    </div>
-                    <div>
-                        Minutes:
-                        <input className="bg-[#242424] text-white border rounded m-3" {...register('minutes', { valueAsNumber: true })} >
-                        </input>
-                        {errors.minutes && <p className="text-red-500">{errors.minutes.message}</p>}
-                    </div>
-                    <div>
-                        Seconds:
-                        <input className="bg-[#242424] text-white border rounded m-3" {...register('seconds', { valueAsNumber: true })} >
-                        </input>
-                        {errors.seconds && <p className="text-red-500">{errors.seconds.message}</p>}
-                    </div>
+                    <InputTimer
+                        label="Hours"
+                        name="hours"
+                        register={register}
+                        error={errors.hours}
+                    />
+                    <InputTimer
+                        label="Minutes"
+                        name="minutes"
+                        register={register}
+                        error={errors.minutes}
+                    />
+                    <InputTimer
+                        label="Seconds"
+                        name="seconds"
+                        register={register}
+                        error={errors.seconds}
+                    />
                 </div >
                 <div className='bg-[#242424] flex justify-center'>
                     <button className='flex justify-center bg-[#242424] text-white' type='submit'>
