@@ -1,6 +1,5 @@
 import { StrictMode } from 'react'
 import './index.css'
-import App from './App.jsx'
 import ReactDOM from 'react-dom/client'
 import { RouterProvider, createRouter } from '@tanstack/react-router'
 
@@ -21,7 +20,6 @@ if (rootElement && !rootElement.innerHTML) {
   root.render(
     <StrictMode>
       <RouterProvider router={router} />
-      <App></App>
     </StrictMode>,
   )
 }
