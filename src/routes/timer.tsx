@@ -36,12 +36,15 @@ function RouteComponent() {
     const playSound = (): void => {
         new Audio('./success.mp3').play();
     }
+    useEffect(() => {
+        document.title = "Time OUT!";
+    })
 
     useEffect(() => {
         if (hours === 0 && minutes === 0 && seconds === 0) {
-            document.title = "Time OUT!";
             if (isRunning) {
                 playSound();
+                document.title = "Time OUT!";
             }
             setIsRunning(false);
             return;
