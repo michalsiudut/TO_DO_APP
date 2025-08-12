@@ -15,6 +15,7 @@ function RouteComponent() {
     const [seconds, setSeconds] = useState(0);
     const [minutes, setMinutes] = useState(0);
     const [hours, setHours] = useState(0);
+    const [isRunning, setIsRunning] = useState(false);
 
     const {
         register,
@@ -25,19 +26,28 @@ function RouteComponent() {
         resolver: zodResolver(timerSchema)
     })
 
+
     const onSubmit = (data: timerSchemaVal) => {
         setSeconds(data.seconds);
         setMinutes(data.minutes);
         setHours(data.hours);
         reset();
     }
+    const playSound = (): void => {
+        new Audio('./success.mp3').play();
+    }
 
     useEffect(() => {
         if (hours === 0 && minutes === 0 && seconds === 0) {
             document.title = "Time OUT!";
+            if (isRunning) {
+                playSound();
+            }
+            setIsRunning(false);
             return;
         }
 
+        setIsRunning(true);
         const timeout = setTimeout(() => {
             document.title = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds - 1).padStart(2, '0')} left`;
             if (seconds > 0) {
