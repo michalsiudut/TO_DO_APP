@@ -6,6 +6,7 @@ import { useUserProperties } from './hooks/useUserProperites';
 import { useForm } from 'react-hook-form'
 import { UserForm, userFormSchema } from './validation/userValidation';
 import { TaskList } from './components/features/TaskList';
+import { useEffect } from 'react';
 
 const App = () => {
 
@@ -23,6 +24,10 @@ const App = () => {
     setUserNameHandler(data.userName);
     reset();
   };
+
+  useEffect(() => {
+    document.title = "Add some tasks!"
+  });
 
   const {
     task, tasks, addTask, removeTask, setTaskHandler,
