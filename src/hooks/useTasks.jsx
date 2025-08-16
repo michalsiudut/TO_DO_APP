@@ -20,10 +20,8 @@ export function useTasks() {
 
     const removeTask = (index) => {
         setAnimatingIndex(index);
-        setTimeout(() => {
-            setTasks(prev => prev.filter((_, i) => i !== index));
-            setAnimatingIndex(null);
-        }, 1000);
+        setTasks(prev => prev.filter((_, i) => i !== index))
+        setAnimatingIndex(null);
     };
 
     const addTask = () => {
