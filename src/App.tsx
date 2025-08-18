@@ -3,16 +3,12 @@ import { useTasks } from './hooks/useTasks';
 import { TaskList } from './components/features/TaskList';
 import { useEffect } from 'react';
 import './index.css';
-import { useUserStore } from './store/userStore';
 
 const App = () => {
 
   useEffect(() => {
     document.title = "Add some tasks!"
   });
-
-  const Age = useUserStore((state) => state.userAge)
-  const Name = useUserStore((state) => state.userName)
 
   const {
     task, tasks, addTask, removeTask, setTaskHandler,
@@ -25,10 +21,7 @@ const App = () => {
   return (
     <div className="flex flex-col w-screen bg-[#242424]">
       <header className="mx-auto mt-4 flex h-20 w-[550px] items-center justify-center rounded-2xl border-white text-[40px] shadow-2xl">Welcome to my TO DO</header>
-      <div>
-        {Age} i {Name}
-      </div>
-      <section className="flex mx-auto">
+      <section className="flex mx-auto mt-4">
         <input
           type="text"
           placeholder="Add task here"

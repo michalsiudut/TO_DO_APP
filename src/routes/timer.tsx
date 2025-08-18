@@ -96,9 +96,7 @@ function RouteComponent() {
                     />
                 </div >
                 <div className='bg-[#242424] flex justify-center'>
-                    <button className='flex justify-center bg-[#242424] text-white' type='submit'>
-                        Apply
-                    </button>
+                    <button className='mb-10' type="submit">Apply</button>
                 </div>
 
             </form >

@@ -3,6 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { createFileRoute } from '@tanstack/react-router'
 import { useForm } from 'react-hook-form'
 import { useUserProperties } from '@/hooks/useUserProperites'
+import { useUserStore } from '@/store/userStore'
 
 export const Route = createFileRoute('/form')({
   component: RouteComponent,
@@ -20,15 +21,14 @@ function RouteComponent() {
   })
 
 
-
-  const {
-    setUserAgeHandler, setUserNameHandler, userAge, userName
-  } = useUserProperties();
-
+  const setAge = useUserStore((state) => state.setAge);
+  const setName = useUserStore((state) => state.setName);
+  const userAge = useUserStore((state) => state.userAge);
+  const userName = useUserStore((state) => state.userName);
 
   const onSubmit = (data: UserForm) => {
-    setUserAgeHandler(data.userAge);
-    setUserNameHandler(data.userName);
+    setAge(data.userAge);
+    setName(data.userName);
     reset();
   };
 
