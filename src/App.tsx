@@ -3,6 +3,7 @@ import { useTasks } from './hooks/useTasks';
 import { TaskList } from './components/features/TaskList';
 import { useEffect } from 'react';
 import './index.css';
+import { useTaskStore } from './store/taskStore';
 
 const App = () => {
 
@@ -10,13 +11,9 @@ const App = () => {
     document.title = "Add some tasks!"
   });
 
-  const {
-    task, tasks, addTask, removeTask, setTaskHandler,
-    editedIndex, editTask, changeStateTask, setEditedTextHandler,
-    saveTask, editedText, useAnimation, isFull, animatingCancelIndex,
-    editAnimationIndex, saveAnimationIndex
-  } = useTasks();
-
+  const task = useTaskStore((state) => state.task);
+  const addTask = useTaskStore((state) => state.addTask);
+  const setTaskHandler = useTaskStore((state) => state.setTaskHandler);
 
   return (
     <div className="flex flex-col w-screen bg-[#242424]">
@@ -30,21 +27,12 @@ const App = () => {
           className="mt-2 rounded-xl border-2 border-gray-300 focus:border-green-600 focus:ring-green-600 outline-none"
         />
         <CustomButton
-          onClick={addTask}
+          onClick={() => addTask(task)}
           text={<i className="fa-solid fa-plus"></i>}
         />
       </section>
 
-      <TaskList
-        tasks={tasks}
-        removeTask={removeTask}
-        editedIndex={editedIndex}
-        editTask={editTask}
-        changeStateTask={changeStateTask}
-        setEditedTextHandler={setEditedTextHandler}
-        saveTask={saveTask}
-        editedText={editedText}
-      />
+      <TaskList />
     </div>
   );
 };

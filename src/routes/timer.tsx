@@ -1,5 +1,4 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { timerSchemaVal, timerSchema } from '../validation/timerValidation';
 import { zodResolver } from '@hookform/resolvers/zod';

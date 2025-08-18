@@ -1,21 +1,17 @@
 import { CustomButton } from "../Button";
+import { useTaskStore } from "@/store/taskStore";
 
-type TaskListProps = {
-    tasks: string[];
-    removeTask: (index: number) => void;
-    editedIndex: number | null;
-    editTask: (task: string, index: number) => void;
-    changeStateTask: () => void;
-    setEditedTextHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    saveTask: (index: number) => void;
-    editedText: string;
-};
 
-export const TaskList = ({
-    tasks, removeTask, editedIndex, editTask,
-    changeStateTask, setEditedTextHandler, saveTask,
-    editedText
-}: TaskListProps) => {
+export const TaskList = () => {
+
+    const tasks = useTaskStore((state) => state.tasks);
+    const removeTask = useTaskStore((state) => state.removeTask);
+    const editedIndex = useTaskStore((state) => state.editedIndex);
+    const editTask = useTaskStore((state) => state.editTask);
+    const changeStateTask = useTaskStore((state) => state.changeStateTask);
+    const setEditedTextHandler = useTaskStore((state) => state.setEditedTextHandler);
+    const saveTask = useTaskStore((state) => state.saveTask);
+    const editedText = useTaskStore((state) => state.editedText);
 
     return (<>
         <ul className='mx-auto space-y-2 mt-5'>
