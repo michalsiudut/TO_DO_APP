@@ -9,18 +9,12 @@ type TaskListProps = {
     setEditedTextHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
     saveTask: (index: number) => void;
     editedText: string;
-    useAnimation: boolean;
-    isFull: boolean;
-    animatingCancelIndex: number | null;
-    editAnimationIndex: number | null;
-    saveAnimationIndex: number | null;
 };
 
 export const TaskList = ({
     tasks, removeTask, editedIndex, editTask,
     changeStateTask, setEditedTextHandler, saveTask,
-    editedText, useAnimation, isFull,
-    animatingCancelIndex, editAnimationIndex, saveAnimationIndex
+    editedText
 }: TaskListProps) => {
 
     return (<>
@@ -38,19 +32,11 @@ export const TaskList = ({
                             <div className="flex gap-2">
                                 <CustomButton
                                     onClick={() => saveTask(index)}
-                                    useEditAnimation="true"
-                                    useAnimation={useAnimation}
-                                    isFull={isFull}
                                     text="Save"
-                                    clas="saveButton"
                                 />
                                 <CustomButton
                                     onClick={changeStateTask}
-                                    useEditAnimation="true"
-                                    useAnimation={true}
-                                    isFull={false}
                                     text="Cancel"
-                                    clas="cancelButton"
                                 />
                             </div>
                         </div>
@@ -61,18 +47,10 @@ export const TaskList = ({
                             <div className="ml-auto items-center">
                                 <CustomButton
                                     onClick={() => removeTask(index)}
-                                    useEditAnimation='true'
-                                    useAnimation={true}
-                                    isFull={false}
-                                    text="Remove"
-                                    clas="minus" />
+                                    text="Remove" />
                                 <CustomButton
                                     onClick={() => editTask(t, index)}
-                                    useEditAnimation={undefined}
-                                    useAnimation={true}
-                                    isFull={false}
-                                    text="Edit"
-                                    clas="minus" />
+                                    text="Edit" />
                             </div>
                         </div>
                     )}

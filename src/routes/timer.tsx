@@ -5,6 +5,7 @@ import { timerSchemaVal, timerSchema } from '../validation/timerValidation';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useEffect } from 'react';
 import { InputTimer } from '@/components/InputTimer';
+import { useTimerStore } from '@/store/timerStore';
 
 export const Route = createFileRoute('/timer')({
     component: RouteComponent,
@@ -12,10 +13,14 @@ export const Route = createFileRoute('/timer')({
 
 function RouteComponent() {
 
-    const [seconds, setSeconds] = useState(0);
-    const [minutes, setMinutes] = useState(0);
-    const [hours, setHours] = useState(0);
-    const [isRunning, setIsRunning] = useState(false);
+    const seconds = useTimerStore((state) => state.seconds);
+    const minutes = useTimerStore((state) => state.minutes);
+    const hours = useTimerStore((state) => state.hours);
+    const isRunning = useTimerStore((state) => state.isRunning);
+    const setSeconds = useTimerStore((state) => state.setSeconds);
+    const setMinutes = useTimerStore((state) => state.setMinutes);
+    const setHours = useTimerStore((state) => state.setHours);
+    const setIsRunning = useTimerStore((state) => state.setIsRunning);
 
     const {
         register,
@@ -36,9 +41,6 @@ function RouteComponent() {
     const playSound = (): void => {
         new Audio('./success.mp3').play();
     }
-    useEffect(() => {
-        document.title = "Time OUT!";
-    })
 
     useEffect(() => {
         if (hours === 0 && minutes === 0 && seconds === 0) {

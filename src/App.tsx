@@ -31,11 +31,7 @@ const App = () => {
         />
         <CustomButton
           onClick={addTask}
-          useEditAnimation={true}
-          useAnimation={useAnimation}
-          isFull={isFull}
           text={<i className="fa-solid fa-plus"></i>}
-          clas="plusAnimation"
         />
       </section>
 
@@ -48,11 +44,6 @@ const App = () => {
         setEditedTextHandler={setEditedTextHandler}
         saveTask={saveTask}
         editedText={editedText}
-        useAnimation={useAnimation}
-        isFull={isFull}
-        animatingCancelIndex={animatingCancelIndex}
-        editAnimationIndex={editAnimationIndex}
-        saveAnimationIndex={saveAnimationIndex}
       />
     </div>
   );
