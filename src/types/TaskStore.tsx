@@ -1,6 +1,6 @@
 type TaskStore = {
     task: string;
-    tasks: string[];
+    tasks: Task[];
     removeTask: (index: number) => void;
     editedIndex: number | null;
     editTask: (task: string, index: number) => void;
@@ -8,6 +8,8 @@ type TaskStore = {
     setEditedTextHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
     saveTask: (index: number) => void;
     editedText: string;
-    addTask: (task: string) => void;
+    addTask: (task: string, status: Task["status"]) => void;
     setTaskHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    status: string;
+    setStatus: (stat: string) => void;
 };

@@ -1,5 +1,4 @@
 import { CustomButton } from './components/Button';
-import { useTasks } from './hooks/useTasks';
 import { TaskList } from './components/features/TaskList';
 import { useEffect } from 'react';
 import './index.css';
@@ -14,6 +13,8 @@ const App = () => {
   const task = useTaskStore((state) => state.task);
   const addTask = useTaskStore((state) => state.addTask);
   const setTaskHandler = useTaskStore((state) => state.setTaskHandler);
+  const setStatus = useTaskStore((state) => state.setStatus);
+  const status = useTaskStore((state) => state.status);
 
   return (
     <div className="flex flex-col w-screen bg-[#242424]">
@@ -26,8 +27,16 @@ const App = () => {
           onChange={setTaskHandler}
           className="mt-2 rounded-xl border-2 border-gray-300 focus:border-green-600 focus:ring-green-600 outline-none"
         />
+        <select className='bg-[#242424] ml-10 border-2 rounded-xl h-12 mt-2' onChange={(e) => setStatus(e.target.value)} value={status}>
+          <option value="">Status of task</option>
+          <option value="Pending">Pending</option>
+          <option value="To Do">To Do</option>
+          <option value="In Progress">In Progress</option>
+        </select>
         <CustomButton
-          onClick={() => addTask(task)}
+          onClick={() => {
+            addTask(task, status as Task['status']);
+          }}
           text={<i className="fa-solid fa-plus"></i>}
         />
       </section>
