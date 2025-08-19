@@ -15,9 +15,20 @@ export const TaskList = () => {
 
     return (<>
         <ul className='mx-auto space-y-2 mt-5'>
-            {tasks.map((t: string, index: number) => (
-                <li key={index} className="p-3 rounded-2xl bg-[#121212] flex items-center">
-                    <span className='mr-10 border-2 border-dotted rounded-2xl p-2.5 w-20'>Task {index + 1}</span>
+            {tasks.map((t: Task, index: number) => (
+                <li key={index} className="p-3 rounded-2xl bg-[#121212] flex items-center w-xl">
+                    <div className="flex flex-col items-start space-y-2">
+                        <span className='mr-10 border-2 pl-1.5 rounded-2xl p-1 w-15 text-[12px] self-start'>Task {index + 1}</span>
+                        <div className={
+                            "border-2 rounded-2xl text-[12px] p-1.5 " +
+                            (t.status === "Pending" ? "bg-amber-200 text-black"
+                                : t.status === "To Do" ? "bg-blue-200 text-black"
+                                    : t.status === "In Progress" ? "bg-red-200 text-black"
+                                        : "")
+                        }>
+                            {t.status}
+                        </div>
+                    </div>
                     {editedIndex === index ? (
                         <div className="flex items-center w-full gap-2">
                             <input
@@ -39,20 +50,20 @@ export const TaskList = () => {
 
                     ) : (
                         <div className="flex items-center w-full gap-2">
-                            <span>{t}</span>
+                            <span>{t.text}</span>
                             <div className="ml-auto items-center">
                                 <CustomButton
                                     onClick={() => removeTask(index)}
                                     text="Remove" />
                                 <CustomButton
-                                    onClick={() => editTask(t, index)}
+                                    onClick={() => editTask(t.text, index)}
                                     text="Edit" />
                             </div>
                         </div>
                     )}
                 </li>
             ))}
-        </ul>
+        </ul >
 
     </>)
 }

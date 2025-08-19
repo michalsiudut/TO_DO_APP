@@ -25,7 +25,7 @@ export const useTaskStore = create<TaskStore>()(
             saveTask: (index: number) => {
                 const { tasks, editedText } = get();
                 const newTasks = tasks.map((task, i) =>
-                    i === index ? editedText : task
+                    i === index ? { ...task, text: editedText } : task
                 );
                 set({
                     tasks: newTasks,
@@ -37,19 +37,28 @@ export const useTaskStore = create<TaskStore>()(
                 const newTasks = get().tasks.filter((_, i) => i !== index);
                 set({ tasks: newTasks });
             },
-            addTask: (task: string) => {
-                if (task.trim() !== "") {
+            addTask: (taskText: string, status: Task["status"]) => {
+                if (taskText.trim() !== "") {
+                    const newTask: Task = { text: taskText, status: status || "" };
                     set((state) => ({
-                        tasks: [...state.tasks, task],
+                        tasks: [...state.tasks, newTask],
                         task: "",
+                        status: "",
                     }));
                 }
             },
+
             setTaskHandler: (e: React.ChangeEvent<HTMLInputElement>) => {
                 set({
                     task: e.target.value
                 })
             },
+            status: "",
+            setStatus: (stat: string) => {
+                set({
+                    status: stat
+                })
+            }
         }),
         {
             name: "task-list"
