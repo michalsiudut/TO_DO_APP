@@ -40,10 +40,8 @@ export function useTasks() {
     }
 
     const editTask = (text, index) => {
-        setEditAnimationIndex(index);
         setEditedIndex(index);
         setEditedText(text);
-        setTimeout(() => { setEditAnimationIndex(null); }, 500);
     }
 
     const saveTask = (index) => {
